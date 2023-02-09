@@ -1,6 +1,6 @@
 package com.practice.Weather.exception;
 
-import com.practice.Weather.dto.MessageResponse;
+import com.practice.Weather.payload.MessageResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestControllerAdvice;

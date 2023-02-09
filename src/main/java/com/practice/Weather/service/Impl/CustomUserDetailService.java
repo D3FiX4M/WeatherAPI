@@ -1,7 +1,7 @@
 package com.practice.Weather.service.Impl;
 
-import com.practice.Weather.repository.RoleRepository;
-import com.practice.Weather.repository.UserRepository;
+import com.practice.Weather.domain.repository.UserRepository;
+import com.practice.Weather.domain.spec.UserSpec;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -18,7 +18,7 @@ public class CustomUserDetailService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        return userRepository.findByUsername(username)
+        return userRepository.findOne(UserSpec.usernameEq(username))
                 .orElseThrow(
                         ()-> new UsernameNotFoundException("User not found")
                 );
