@@ -1,12 +1,14 @@
 package com.practice.Weather.service.Impl;
 
-import com.practice.Weather.dto.AuthUserDto;
-import com.practice.Weather.entity.Role;
-import com.practice.Weather.entity.User;
+import com.practice.Weather.domain.spec.RoleSpec;
+import com.practice.Weather.domain.spec.UserSpec;
+import com.practice.Weather.payload.AuthUserDto;
+import com.practice.Weather.domain.entity.Role;
+import com.practice.Weather.domain.entity.User;
 import com.practice.Weather.exception.ExistException;
 import com.practice.Weather.exception.NotFoundException;
-import com.practice.Weather.repository.RoleRepository;
-import com.practice.Weather.repository.UserRepository;
+import com.practice.Weather.domain.repository.RoleRepository;
+import com.practice.Weather.domain.repository.UserRepository;
 import com.practice.Weather.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -28,11 +30,11 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String SignUp(AuthUserDto dto) {
 
-        if (userRepository.existsByUsername(dto.getUsername())){
+        if (userRepository.exists(UserSpec.usernameEq(dto.getUsername()))){
             throw new ExistException("User with username already exist");
         }
 
-        Role role = roleRepository.findByName("USER")
+        Role role = roleRepository.findOne(RoleSpec.nameEq("USER"))
                 .orElseThrow(
                         ()-> new NotFoundException("Role not found")
                 );

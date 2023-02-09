@@ -1,6 +1,6 @@
 package com.practice.Weather.controller;
 
-import com.practice.Weather.dto.AuthUserDto;
+import com.practice.Weather.payload.AuthUserDto;
 import com.practice.Weather.service.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
